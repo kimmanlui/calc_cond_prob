@@ -27,3 +27,6 @@ shortSummary(res[[1]], "age + height ", combination=1)
 #Use goodchance function to extract only those with the intereted range
 
 lapply(res_list, goodchance, upper=0.7, lower=0.25)
+
+#Advanced Use
+#calc_cond_prob(df, formula_string="conditional_probability$lang_score >= 80 | conditional_probability$math_score >= 80 ~ age",  range_list=list(3))
