@@ -1,3 +1,4 @@
+library(dplyr)
 # internal functions used for calc_cond_prob
 #for calc_cond_prob
 toCountListElement <- function(input_list) {
