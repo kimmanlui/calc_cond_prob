@@ -191,9 +191,13 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
         stop('Check col_name_list: One or more column names are not found in the input data (clean_data.)')
     }
 
-    cond_evaluation_column <- sub("^(.*?)\\s.*", "\\1", cond_evaluation)
-    if (!cond_evaluation_column %in% names(clean_data)) {
+    if (!grepl("conditional_probability\\$", cond_evaluation))
+    {
+      print("-----")
+      cond_evaluation_column <- sub("^(.*?)\\s.*", "\\1", cond_evaluation)
+      if (!cond_evaluation_column %in% names(clean_data)) {
         stop('Check cond_evaluation: cond_evaluation_column is not found in the input data (clean_data.)')
+      }
     }
 
     # Check and update cond_evaluation
