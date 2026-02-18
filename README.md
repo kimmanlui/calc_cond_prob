@@ -1,4 +1,8 @@
-# Assume your data frame is named df
+# Introduction 
+This package provides tools to find conditional probabilities in a data frame with decimal-valued entries.
+
+# Example
+#Assume your data frame is named df
 
 df <- data.frame(
 exam_score = c(85, 78, 90, 92, 70, 88, 95),
@@ -13,10 +17,13 @@ income = c(3000, 3200, 3500, 4000, 2600, 3100, 3900)
 calc_cond_prob(df, "exam_score >= 80 ~ age ", range_list=list( 3))
 
 #Find P(exam_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively. 
+
 res=calc_cond_prob(df, "exam_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
 
 #the return is a list. We may further analyze the P(exam_score ≥ 80 | age) , P(exam_score ≥ 80 | height) and P(exam_score ≥ 80 | age and height)
+
 shortSummary(res[[1]], "age + height ", combination=1)
 
 #Use goodchance function to extract only those with the intereted range
+
 lapply(res_list, goodchance, upper=0.7, lower=0.25)
