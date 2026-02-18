@@ -1,4 +1,4 @@
-#Assume your data frame is named df
+# Assume your data frame is named df
 
 df <- data.frame(
 exam_score = c(85, 78, 90, 92, 70, 88, 95),
