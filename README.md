@@ -4,7 +4,7 @@ This package provides tools for determining conditional probabilities across def
 # Example
 ## Assume your data frame is named df
 
-df <- data.frame(
+df <- data.frame(<br>
 exam_score = c(85, 78, 90, 92, 70, 88, 95),
 age = c(16, 17, 18, 19, 16, 17, 18),
 height = c(150, 160, 165, 170, 155, 158, 172),
