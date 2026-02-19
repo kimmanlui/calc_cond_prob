@@ -14,7 +14,7 @@ df <- data.frame(<br>
 &nbsp;&nbsp;income = c(3000, 3200, 3500, 4000, 2600, 3100, 3900)<br>
 )
 
-## Find P(exam_lang_score ≥ 80 | age)
+## Find P(exam_lang_score ≥ 80 | age) (EASY)
 We find P(exam_lang_score ≥ 80 | age) in which age is split into three groups. Note that the return is a list. Note that outliners are removed.<br>
 
 calc_cond_prob(df, formula_string="exam_lang_score >= 80  ~ age ",  range_list=list(3))<br>
@@ -27,6 +27,10 @@ Sample Result<br>
 | 16:17   | 1   | 2 | 0.5 |
 | 17:18  | 1   | 2 | 0.5 |
 | 18:19  | 1   | 2 | 0.5 |
+
+## Find P(exam_lang_score ≥ 80 | age) (SPECIFIC) 
+We find P(exam_lang_score ≥ 80 | age) in which each age group is defined. Note that the return is a list. <br>
+calc_cond_prob(df, "exam_lang_score >= 80 ~ age ", range_list=list(c(16,16.5,17.5,18.5,19.5)))
 
 ## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
 We find P(exam_lang_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively.<br>
