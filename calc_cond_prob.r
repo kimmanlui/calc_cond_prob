@@ -33,7 +33,9 @@ adjust_equal_ranges <- function(range_ele) {
   })
 }
 
-#for calc_cond_prob
+#' @importFrom stats na.omit
+#' @importFrom stats quantile
+#' @importFrom utils combn
 findBoundary= function (data, numGroup) {
     data=na.omit(data)
     boundary_list <- lapply(1:numGroup, function(i) {
@@ -78,6 +80,8 @@ fixColonFormat=function(df, col_name='Weekday')
     return(df)
 }
 
+#' Filter those useful records
+#'
 #' @param df A dataframe.
 #' @param col_name A colume name string.
 #' @param upper A number.
@@ -93,7 +97,8 @@ goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
     return(df[ df$odd>=upper | (df$odd<=lower & df$odd>0), ])
 }
 
-
+#' Provide a summary for the dataframe result done by calc_cond_prob
+#'
 #' @param df A dataframe.
 #' @param coln A colume names string.
 #' @param combination A number.
@@ -104,6 +109,10 @@ goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
 #' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
 #' shortSummary(res[[1]], "age + height ", combination=1)
 shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
+  hit <- NULL
+  total <- NULL
+  total_sum <- NULL
+  hit_sum <- NULL
   if (!is.data.frame(df)) { stop("input must be data.frame")}
   coln=gsub("\\+", ",", coln)
   cols <- trimws(unlist(strsplit(coln, ",")))
@@ -144,6 +153,9 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
 #' @param clean_data A dataframe.
 #' @param formula_string A formula character
 #' @param range_list A list
+#' @param cond_evaluation A string
+#' @param col_name_list A list
+#' @param debug A integer
 #' @return A list.
 #' @export
 #' @examples
