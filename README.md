@@ -20,7 +20,8 @@ calc_cond_prob(df, "exam_score >= 80 ~ age ", range_list=list( 3))
 
 res=calc_cond_prob(df, "exam_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
 
-## Further analyze the P(exam_score ≥ 80 | age) , P(exam_score ≥ 80 | height) and P(exam_score ≥ 80 | age and height)
+## Conduct a further analysis of the probabilities across all combinations of age and height. 
+Below is for P(exam_score ≥ 80 | age) , P(exam_score ≥ 80 | height) and P(exam_score ≥ 80 | age and height)
 
 shortSummary(res[[1]], "age + height ", combination=1)
 
