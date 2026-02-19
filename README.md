@@ -5,21 +5,21 @@ This package provides tools for determining conditional probabilities across def
 ## Sample Data
 Assume your data frame is named df
 
-`df <- data.frame(<br>
+df <- data.frame(<br>
 &nbsp;&nbsp;exam_math_score = c(85, 78, 90, 92, 70, 88, 95),<br>
 &nbsp;&nbsp;exam_lang_score = c(80, 88, 85, 82, 77, 68, 55),<br>
 &nbsp;&nbsp;age = c(16, 17, 18, 19, 16, 17, 18),<br>
 &nbsp;&nbsp;height = c(150, 160, 165, 170, 155, 158, 172),<br>
 &nbsp;&nbsp;weight = c(45, 60, 62, 67, 50, 55, 68),<br>
 &nbsp;&nbsp;income = c(3000, 3200, 3500, 4000, 2600, 3100, 3900)<br>
-)`
+)
 
 ## Find P(exam_lang_score ≥ 80 | age) (EASY)
 We find P(exam_lang_score ≥ 80 | age) in which age is split into three groups. Note that the return is a list. Note that outliners are removed.<br>
 
 `calc_cond_prob(df, formula_string="exam_lang_score >= 80  ~ age ",  range_list=list(3))`
 or <br>
-calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
+`calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))`
 
 Sample Result<br>
 | age | hit | total | odd
@@ -31,7 +31,7 @@ Sample Result<br>
 ## Find P(exam_lang_score ≥ 80 | age) (SPECIFIC) 
 We find P(exam_lang_score ≥ 80 | age) in which each age group is defined. Note that the return is a list. <br>
 
-calc_cond_prob(df, "exam_lang_score >= 80 ~ age ", range_list=list(c(16,16.5,17.5,18.5,19.5)))
+`calc_cond_prob(df, "exam_lang_score >= 80 ~ age ", range_list=list(c(16,16.5,17.5,18.5,19.5)))`
 
 Sample Result<br>
 | age | hit | total | odd
@@ -44,7 +44,7 @@ Sample Result<br>
 ## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
 We find P(exam_lang_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively.<br>
 
-calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
+`calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))`
 
 | age | height | weight | income | hit | total | odd 
 | -------- | -------- |-------- | -------- | -------- |-------- | -------- |
@@ -57,8 +57,8 @@ calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", ran
 Conduct a further analysis of the probabilities across all combinations of age and height.<br>
 Below is for P(exam_lang_score ≥ 80 | age) , P(exam_lang_score ≥ 80 | height) and P(exam_lang_score ≥ 80 | age and height)<br>
 
-res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))<br>
-shortSummary(res[[1]], "age + height ", combination=1)
+`res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))`<br>
+`shortSummary(res[[1]], "age + height ", combination=1)`
 
 RESULT 1<br>
 | age | hit | total | odd
@@ -87,9 +87,9 @@ RESULT 3<br>
 ## Filter out the result
 Utilize the goodchance function to filter for values that fall within the specified range<br>
 
-res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))<br>
-summary_result_list=shortSummary(res[[1]], "age + height ", combination=1)<br>
-lapply(summary_result_list, goodchance, upper=0.7, lower=0.25)<br>
+`res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))`<br>
+`summary_result_list=shortSummary(res[[1]], "age + height ", combination=1)`<br>
+`lapply(summary_result_list, goodchance, upper=0.7, lower=0.25)`<br>
 
 ## Advanced Use
 
