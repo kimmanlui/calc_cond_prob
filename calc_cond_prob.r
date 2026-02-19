@@ -35,7 +35,6 @@ adjust_equal_ranges <- function(range_ele) {
 
 #' @importFrom stats na.omit
 #' @importFrom stats quantile
-#' @importFrom utils combn
 findBoundary= function (data, numGroup) {
     data=na.omit(data)
     boundary_list <- lapply(1:numGroup, function(i) {
@@ -89,7 +88,8 @@ fixColonFormat=function(df, col_name='Weekday')
 #' @return A list.
 #' @export
 #' @examples
-#' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
+#' df <- data.frame(exam_lang_score = c(80, 88, 85, 82, 77, 68, 55),age = c(16, 17, 18, 19, 16, 17, 18),height = c(150, 160, 165, 170, 155, 158, 172))
+#' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height", range_list=list( 3,4))
 #' summary_result_list=shortSummary(res[[1]], "age + height ", combination=1)
 #' lapply(summary_result_list, goodchance, upper=0.7, lower=0.25)
 goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
@@ -105,8 +105,10 @@ goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
 #' @return A list.
 #' @export
 #' @import dplyr
+#' @importFrom utils combn
 #' @examples
-#' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
+#' df <- data.frame(exam_lang_score = c(80, 88, 85, 82, 77, 68, 55),age = c(16, 17, 18, 19, 16, 17, 18),height = c(150, 160, 165, 170, 155, 158, 172))
+#' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height", range_list=list( 3,4))
 #' shortSummary(res[[1]], "age + height ", combination=1)
 shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
   hit <- NULL
@@ -159,9 +161,8 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
 #' @return A list.
 #' @export
 #' @examples
-#' df <- data.frame(exam_math_score = c(85, 78, 90, 92, 70, 88, 95),exam_lang_score = c(80, 88, 85, 82, 77, 68, 55),age = c(16, 17, 18, 19, 16, 17, 18),height = c(150, 160, 165, 170, 155, 158, 172),weight = c(45, 60, 62, 67, 50, 55, 68),income = c(3000, 3200, 3500, 4000, 2600, 3100, 3900))
+#' df <- data.frame(exam_lang_score = c(80, 88, 85, 82, 77, 68, 55),age = c(16, 17, 18, 19, 16, 17, 18),height = c(150, 160, 165, 170, 155, 158, 172))
 #' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
-#' calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
 calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evaluation=NULL,  col_name_list=NULL,  debug=0)
 {
     if (is.list(range_list)==FALSE) stop("range_list is mandatory. It must be a list type")
@@ -215,7 +216,8 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
              if (debug==1) print("use auto conversion for single numeric")
              numGroup=my_var
              tempName=col_name_list[[dx]]
-             range_list[[dx]]=findBoundary(clean_data[ , tempName], numGroup)
+             tempdf=clean_data[ , tempName]
+             range_list[[dx]]=findBoundary(tempdf , numGroup)
          } else if (is.numeric(my_var) && length(my_var) > 1)
          {
              if (debug==1) print("calling convert2Range")
@@ -243,18 +245,6 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
     }
 
 
-    #if (!grepl("conditional_probability\\$", cond_evaluation))
-    #{
-    #  cond_evaluation_column <- sub("^(.*?)\\s.*", "\\1", cond_evaluation)
-    #  if (!cond_evaluation_column %in% names(clean_data)) {
-    #    stop('Check cond_evaluation: cond_evaluation_column is not found in the input data (clean_data.)')
-    #  }
-    #}
-
-    # Check and update cond_evaluation
-    #if (!grepl("conditional_probability\\$", cond_evaluation)) {
-    #    cond_evaluation <- paste0("conditional_probability$", cond_evaluation)
-    #}
     if (debug==1) print (cond_evaluation)
 
     alst <- toCountListElement(range_list)
