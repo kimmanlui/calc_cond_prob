@@ -1,4 +1,7 @@
-# Introduction 
+# Title
+Range Conditional Probability
+
+# Description 
 This package provides tools for determining conditional probabilities across defined ranges in any numeric data frame.
 
 # Example
