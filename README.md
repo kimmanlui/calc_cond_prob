@@ -66,7 +66,7 @@ shortSummary(res[[1]], "age + height ", combination=1)
 | 17:18  | 1   | 2 | 0.5 |
 | 18:19  | 1   | 1 | 1.0 |
 
-Attention: The result P(exam_lang_score ≥ 80 | age) is different from calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3)) because it is derived from the result calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4)).
+Attention: The result P(exam_lang_score ≥ 80 | age) is different from the one of calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3)) because it is derived from the result of calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4)).
 
 | height | hit | total | odd
 | -------- | -------- |-------- | -------- |
