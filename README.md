@@ -22,10 +22,10 @@ calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 
 ## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
 We find P(exam_lang_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively.<br>
-res=calc_cond_prob(df, "exam_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
+res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
 
 ## Conduct a further analysis of the probabilities across all combinations of age and height. 
-Below is for P(exam_score ≥ 80 | age) , P(exam_score ≥ 80 | height) and P(exam_score ≥ 80 | age and height)
+Below is for P(exam_lang_score ≥ 80 | age) , P(exam_lang_score ≥ 80 | height) and P(exam_lang_score ≥ 80 | age and height)
 
 shortSummary(res[[1]], "age + height ", combination=1)
 
@@ -35,6 +35,6 @@ lapply(res_list, goodchance, upper=0.7, lower=0.25)
 
 ## Advanced Use
 
-calc_cond_prob(df, formula_string="lang_score >= 80 | math_score >= 80 ~ age + income",  range_list=list(3,4))
+calc_cond_prob(df, formula_string="exam_lang_score >= 80 | exam_math_score >= 80 ~ age + income",  range_list=list(3,4))
 
-calc_cond_prob(df, formula_string="conditional_probability$lang_score >= 80 | conditional_probability$math_score >= 80 ~ age",  range_list=list(3))
+calc_cond_prob(df, formula_string="conditional_probability$exam_lang_score >= 80 | conditional_probability$exam_math_score >= 80 ~ age",  range_list=list(3))
