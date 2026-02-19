@@ -123,7 +123,6 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
 {
     if (is.list(range_list)==FALSE) stop("range_list is mandatory. It must be a list type")
     
-    
     if (!is.null(formula_string)) 
     {
         #print("Use formula_string")
@@ -153,7 +152,6 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
     
     if (length(range_list)!=length(col_name_list)) stop('Error due to length(range_list)!=length(col_name_list)')
 
-   
     for ( dx in  1:length(range_list))
     {
          #print(dx)
@@ -186,24 +184,34 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
     }
     #print(range_list)
 
-
     if (length(col_name_list[!col_name_list %in% names(clean_data)]) >= 1) {
         stop('Check col_name_list: One or more column names are not found in the input data (clean_data.)')
     }
 
     if (!grepl("conditional_probability\\$", cond_evaluation))
     {
-      print("-----")
-      cond_evaluation_column <- sub("^(.*?)\\s.*", "\\1", cond_evaluation)
-      if (!cond_evaluation_column %in% names(clean_data)) {
-        stop('Check cond_evaluation: cond_evaluation_column is not found in the input data (clean_data.)')
-      }
+        tokens <- regmatches(cond_evaluation, gregexpr("[a-zA-Z][a-zA-Z0-9._]*", cond_evaluation, perl = TRUE))[[1]]
+        ftokens=paste0("conditional_probability$", tokens)
+        for ( k in 1: length(tokens ))
+        {
+            if (!(tokens[k] %in% names(clean_data ))){ stop(paste0(tokens[k],' not found in any column names of input dataframe'))  }
+            cond_evaluation=gsub( tokens[k], ftokens[k], cond_evaluation )
+        }
     }
 
+    
+    #if (!grepl("conditional_probability\\$", cond_evaluation))
+    #{
+    #  cond_evaluation_column <- sub("^(.*?)\\s.*", "\\1", cond_evaluation)
+    #  if (!cond_evaluation_column %in% names(clean_data)) {
+    #    stop('Check cond_evaluation: cond_evaluation_column is not found in the input data (clean_data.)')
+    #  }
+    #}
+
     # Check and update cond_evaluation
-    if (!grepl("conditional_probability\\$", cond_evaluation)) {
-        cond_evaluation <- paste0("conditional_probability$", cond_evaluation)
-    }
+    #if (!grepl("conditional_probability\\$", cond_evaluation)) {
+    #    cond_evaluation <- paste0("conditional_probability$", cond_evaluation)
+    #}
     if (debug==1) print (cond_evaluation)
     
     alst <- toCountListElement(range_list)
