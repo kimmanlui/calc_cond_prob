@@ -91,6 +91,23 @@ Utilize the goodchance function to filter for values that fall within the specif
 `summary_result_list=shortSummary(res[[1]], "age + height ", combination=1)`<br>
 `lapply(summary_result_list, goodchance, upper=0.7, lower=0.25)`<br>
 
+RESULT 1<br>
+| age | hit | total | odd
+| -------- | -------- |-------- | -------- |
+| 18:19  | 1   | 1 | 1.0 |
+
+
+RESULT 2<br>
+| height | hit | total | odd
+| -------- | -------- |-------- | -------- |
+| 160:167.48   | 2   | 1 | 1.0 |
+
+RESULT 3<br>
+| age | height | hit | total | odd
+| -------- | -------- | -------- |-------- | -------- |
+| 17:18  | 160:167.48   | 1   | 1 | 1.0 |
+| 18:19  | 160:167.48   | 1   | 1 | 1.0 |
+
 ## Advanced Use
 
 `calc_cond_prob(df, formula_string="exam_lang_score >= 80 | exam_math_score >= 80 ~ age + income",  range_list=list(3,4))`
