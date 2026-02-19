@@ -22,9 +22,10 @@ or <br>
 calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 
 Sample Result<br>
-Column One       Column Two       Column Three
-Data A           Data B           Data C
-Data D           Data E           Data F
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell 1   | Cell 2   |
+| Cell 3   | Cell 4   |
 
 
 ## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
