@@ -65,6 +65,7 @@ shortSummary(res[[1]], "age + height ", combination=1)
 | 16:17   | 1   | 2 | 0.5 |
 | 17:18  | 1   | 2 | 0.5 |
 | 18:19  | 1   | 1 | 1.0 |
+Note that P(exam_lang_score ≥ 80 | age) is derived from the result calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4)).
 
 | height | hit | total | odd
 | -------- | -------- |-------- | -------- |
