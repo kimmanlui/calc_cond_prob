@@ -93,6 +93,6 @@ Utilize the goodchance function to filter for values that fall within the specif
 
 ## Advanced Use
 
-calc_cond_prob(df, formula_string="exam_lang_score >= 80 | exam_math_score >= 80 ~ age + income",  range_list=list(3,4))
+`calc_cond_prob(df, formula_string="exam_lang_score >= 80 | exam_math_score >= 80 ~ age + income",  range_list=list(3,4))`
 
-calc_cond_prob(df, formula_string="conditional_probability$exam_lang_score >= 80 | conditional_probability$exam_math_score >= 80 ~ age",  range_list=list(3))
+`calc_cond_prob(df, formula_string="conditional_probability$exam_lang_score >= 80 | conditional_probability$exam_math_score >= 80 ~ age",  range_list=list(3))`
