@@ -60,6 +60,7 @@ Below is for P(exam_lang_score ≥ 80 | age) , P(exam_lang_score ≥ 80 | height
 res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))<br>
 shortSummary(res[[1]], "age + height ", combination=1)
 
+RESULT 1<br>
 | age | hit | total | odd
 | -------- | -------- |-------- | -------- |
 | 16:17   | 1   | 2 | 0.5 |
@@ -68,11 +69,20 @@ shortSummary(res[[1]], "age + height ", combination=1)
 
 Attention: The result P(exam_lang_score ≥ 80 | age) is different from the one of calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3)) because it is derived from the result of calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4)).
 
+RESULT 2<br>
 | height | hit | total | odd
 | -------- | -------- |-------- | -------- |
 | 150:156.48    | 1   | 2 | 0.5 |
 | 156.5:159.98  | 0   | 2 | 0.5 |
 | 160:167.48   | 2   | 1 | 1.0 |
+
+RESULT 3<br>
+| age | height | hit | total | odd
+| -------- | -------- | -------- |-------- | -------- |
+| 16:17  | 150:156.48    | 1   | 2 | 0.5 |
+| 17:18  |156.5:159.98  | 0   | 1 | 0.0 |
+| 17:18  | 160:167.48   | 1   | 1 | 1.0 |
+| 18:19  | 160:167.48   | 1   | 1 | 1.0 |
 
 ## Filter out the result
 Utilize the goodchance function to filter for values that fall within the specified range<br>
