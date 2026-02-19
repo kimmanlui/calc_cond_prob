@@ -29,4 +29,7 @@ shortSummary(res[[1]], "age + height ", combination=1)
 lapply(res_list, goodchance, upper=0.7, lower=0.25)
 
 #Advanced Use
-#calc_cond_prob(df, formula_string="conditional_probability$lang_score >= 80 | conditional_probability$math_score >= 80 ~ age",  range_list=list(3))
+
+calc_cond_prob(df, formula_string="lang_score >= 80 | math_score >= 80 ~ age + income",  range_list=list(3,4))
+
+calc_cond_prob(df, formula_string="conditional_probability$lang_score >= 80 | conditional_probability$math_score >= 80 ~ age",  range_list=list(3))
