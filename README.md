@@ -46,6 +46,13 @@ We find P(exam_lang_score ≥ 80 | age and height and weight and income), where 
 
 res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
 
+| age | height | weight | income | hit | total | odd 
+| -------- | -------- |-------- | -------- | -------- |-------- | -------- |
+| 16:17   | 150:156.48    | 45:52.49| 2600:3049.7  |1 | 2 |0.5 |
+| 17:18 | 	156.5:159.98   | 52.5:59.99 | 3050:3199.68 |0 | 1 |0.0 |
+| 17:18  | 160:167.48   | 60:64.49 | 3200:3699.63 |1 | 1 |1.0 |
+| 18:19  | 160:167.48   | 60:64.49 | 3200:3699.63 |1 | 1 |1.0 |
+
 ## Conduct a further analysis
 Conduct a further analysis of the probabilities across all combinations of age and height.<br>
 Below is for P(exam_lang_score ≥ 80 | age) , P(exam_lang_score ≥ 80 | height) and P(exam_lang_score ≥ 80 | age and height)<br>
