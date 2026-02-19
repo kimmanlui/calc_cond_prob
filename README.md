@@ -2,7 +2,8 @@
 This package provides tools for determining conditional probabilities across defined ranges in any numeric data frame.
 
 # Example
-## Assume your data frame is named df
+## Sample Data
+Assume your data frame is named df
 
 df <- data.frame(<br>
 &nbsp;&nbsp;exam_math_score = c(85, 78, 90, 92, 70, 88, 95),<br>
@@ -13,9 +14,11 @@ df <- data.frame(<br>
 &nbsp;&nbsp;income = c(3000, 3200, 3500, 4000, 2600, 3100, 3900)<br>
 )
 
-## Find P(exam_score ≥ 80 | age), where age is split into three groups.
-
-calc_cond_prob(df, "exam_score >= 80 ~ age ", range_list=list( 3))
+## Find P(exam_score ≥ 80 | age)
+We find P(exam_score ≥ 80 | age) in which age is split into three groups.
+calc_cond_prob(df, formula_string="exam_lang_score >= 80  ~ age ",  range_list=list(3))<br>
+or <br>
+calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 
 ## Find P(exam_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively. The return is a list
 
