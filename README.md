@@ -39,7 +39,7 @@ Sample Result<br>
 | 16:16.5   | 1   | 2 | 0.5 |
 | 16.5:17.5 | 1   | 2 | 0.5 |
 | 17.5:18.5  | 1   | 2 | 0.5 |
-| 18.5:19.5  | 1   | 1 | 1 |
+| 18.5:19.5  | 1   | 1 | 1.0 |
 
 ## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
 We find P(exam_lang_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively.<br>
