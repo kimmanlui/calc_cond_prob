@@ -2,7 +2,8 @@
 Range Conditional Probability
 
 # Description 
-This toolkit allows users to calculate conditional probabilities across defined ranges in any numeric data frame. Unlike general conditional probability packages that require numerical data to be converted into categorical data, this toolkit directly handles numerical data in various ranges, enabling the calculation of conditional probabilities without conversion.
+This toolkit allows users to calculate conditional probabilities across defined ranges in any numeric data frame. Unlike general conditional probability packages that require numerical data to be converted into categorical data, this toolkit directly handles numerical data in various ranges, enabling the calculation of conditional probabilities without conversion. For example, I have a dataset named `df` that includes two numerical columns: `sleep_hour` and `age`. To find P( sleep_hour >= 8.5 l age), we typically need to categorize age into groups, such as "old," "middle-aged," and "young," in order to utilize the built-in functions in R. This package simplifies our task by handling this categorization internally. For instance, we can use the function `calc_cond_prob(df, "sleep_hour >= 8.5 ~ age", range_list=list(3))`.
+
 
 # Example
 ## Sample Data
