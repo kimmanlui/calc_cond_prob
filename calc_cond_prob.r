@@ -88,7 +88,7 @@ fixColonFormat=function(df, col_name='Weekday')
 #' @return A list.
 #' @export
 #' @examples
-#' df <- data.frame(exam_lang_score = c(80, 88, 85, 82, 77, 68, 55),age = c(16, 17, 18, 19, 16, 17, 18),height = c(150, 160, 165, 170, 155, 158, 172))
+#' df<-data.frame(exam_lang_score=c(80,88,85,82,34,34),age=c(6,7,8,6,7,8),height =c(5,6,6,7,5,7))
 #' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height", range_list=list( 3,4))
 #' summary_result_list=shortSummary(res[[1]], "age + height ", combination=1)
 #' lapply(summary_result_list, goodchance, upper=0.7, lower=0.25)
@@ -107,7 +107,7 @@ goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
 #' @import dplyr
 #' @importFrom utils combn
 #' @examples
-#' df <- data.frame(exam_lang_score = c(80, 88, 85, 82, 77, 68, 55),age = c(16, 17, 18, 19, 16, 17, 18),height = c(150, 160, 165, 170, 155, 158, 172))
+#' df<-data.frame(exam_lang_score=c(80,88,85,82,34,34),age=c(6,7,8,6,7,8),height =c(5,6,6,7,5,7))
 #' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height", range_list=list( 3,4))
 #' shortSummary(res[[1]], "age + height ", combination=1)
 shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
@@ -161,7 +161,7 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
 #' @return A list.
 #' @export
 #' @examples
-#' df <- data.frame(exam_lang_score = c(80, 88, 85, 82, 77, 68, 55),age = c(16, 17, 18, 19, 16, 17, 18),height = c(150, 160, 165, 170, 155, 158, 172))
+#' df<-data.frame(exam_lang_score=c(80,88,85,82,34,34),age=c(6,7,8,6,7,8),height =c(5,6,6,7,5,7))
 #' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evaluation=NULL,  col_name_list=NULL,  debug=0)
 {
