@@ -1,5 +1,5 @@
 # Introduction 
-This package provides tools to find conditional probabilities in a data frame with decimal-valued entries.
+This package provides tools for determining conditional probabilities across defined ranges in any numeric data frame.
 
 # Example
 ## Assume your data frame is named df
