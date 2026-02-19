@@ -14,14 +14,14 @@ df <- data.frame(<br>
 &nbsp;&nbsp;income = c(3000, 3200, 3500, 4000, 2600, 3100, 3900)<br>
 )
 
-## Find P(exam_score ≥ 80 | age)
-We find P(exam_score ≥ 80 | age) in which age is split into three groups.
+## Find P(exam_lang_score ≥ 80 | age)
+We find P(exam_lang_score ≥ 80 | age) in which age is split into three groups. Note that the return is a list<br>
 calc_cond_prob(df, formula_string="exam_lang_score >= 80  ~ age ",  range_list=list(3))<br>
 or <br>
 calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 
-## Find P(exam_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively. The return is a list
-
+## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
+We find P(exam_lang_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively.<br>
 res=calc_cond_prob(df, "exam_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
 
 ## Conduct a further analysis of the probabilities across all combinations of age and height. 
