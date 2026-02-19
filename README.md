@@ -17,8 +17,6 @@ df <- data.frame(<br>
 ## Find P(exam_lang_score ≥ 80 | age) (EASY)
 We find P(exam_lang_score ≥ 80 | age) in which age is split into three groups. Note that the return is a list. Note that outliners are removed.<br>
 
-`calc_cond_prob(df, formula_string="exam_lang_score >= 80  ~ age ",  range_list=list(3))`
-or <br>
 `calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))`
 
 Sample Result<br>
