@@ -10,16 +10,16 @@ toCountListElement <- function(input_list) {
 gen_combination <- function(a) {
   # Use expand.grid to create all combinations of the list elements
   df <- expand.grid(a)
-  
+
   # Convert to a data frame
   result_df <- as.data.frame(df)
-  
+
   # Sort the data frame by all columns
   sorted_df <- result_df[do.call(order, result_df), ]
-  
+
   # Reset the row numbers
   row.names(sorted_df) <- NULL
-  
+
   return(sorted_df)
 }
 
@@ -61,7 +61,7 @@ convert2Range=function( breaks=c( 1, 2, 3, 4,5))
     return(elelist)
 }
 
-#for calc_cond_prob 
+#for calc_cond_prob
 fixColonFormat=function(df, col_name='Weekday')
 {
     for (i in 1:nrow(df))
@@ -77,15 +77,36 @@ fixColonFormat=function(df, col_name='Weekday')
     }
     return(df)
 }
+
+#' @param df A dataframe.
+#' @param col_name A colume name string.
+#' @param upper A number.
+#' @param lower A number.
+#' @return A list.
+#' @export
+#' @examples
+#' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
+#' summary_result_list=shortSummary(res[[1]], "age + height ", combination=1)
+#' lapply(summary_result_list, goodchance, upper=0.7, lower=0.25)
 goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
 {
     return(df[ df$odd>=upper | (df$odd<=lower & df$odd>0), ])
 }
 
+
+#' @param df A dataframe.
+#' @param coln A colume names string.
+#' @param combination A number.
+#' @return A list.
+#' @export
+#' @import dplyr
+#' @examples
+#' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
+#' shortSummary(res[[1]], "age + height ", combination=1)
 shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
   if (!is.data.frame(df)) { stop("input must be data.frame")}
   coln=gsub("\\+", ",", coln)
-  cols <- trimws(unlist(strsplit(coln, ",")))  
+  cols <- trimws(unlist(strsplit(coln, ",")))
   if (combination==1)
   {
      vec=cols
@@ -95,14 +116,14 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
   {
       com_res=list(cols)
   }
-  #print(com_res)                                  
-  res_list=list() 
-  #return()                                  
+  #print(com_res)
+  res_list=list()
+  #return()
   for (i in 1:length(com_res))
   {
-      
+
       cols_name_ele=com_res[[i]]
-      cols_ele <- trimws(unlist(strsplit(cols_name_ele, ",")))  
+      cols_ele <- trimws(unlist(strsplit(cols_name_ele, ",")))
       #print(cols_ele)
       res=df %>%
         group_by(across(all_of(cols_ele))) %>%
@@ -116,19 +137,29 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
        res_list[[i]]=as.data.frame(res)
     }
     return(res_list)
-} 
+}
 
-# Initialize an empty data frame to store results
+#' Calulate Conditional Probability with Range
+#'
+#' @param clean_data A dataframe.
+#' @param formula_string A formula character
+#' @param range_list A list
+#' @return A list.
+#' @export
+#' @examples
+#' df <- data.frame(exam_math_score = c(85, 78, 90, 92, 70, 88, 95),exam_lang_score = c(80, 88, 85, 82, 77, 68, 55),age = c(16, 17, 18, 19, 16, 17, 18),height = c(150, 160, 165, 170, 155, 158, 172),weight = c(45, 60, 62, 67, 50, 55, 68),income = c(3000, 3200, 3500, 4000, 2600, 3100, 3900))
+#' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
+#' calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
 calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evaluation=NULL,  col_name_list=NULL,  debug=0)
 {
     if (is.list(range_list)==FALSE) stop("range_list is mandatory. It must be a list type")
-    
-    if (!is.null(formula_string)) 
+
+    if (!is.null(formula_string))
     {
         #print("Use formula_string")
         #formula_string <- "y ~ x1 + x2"
         parts <- strsplit(formula_string, "~")[[1]]
-        lhs <- trimws(parts[1])  
+        lhs <- trimws(parts[1])
         rhs <- trimws(parts[2])
         if (is.null(cond_evaluation))
         {
@@ -149,7 +180,7 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
         print(paste0('col_name_list is ',length(col_name_list),' and we will truncate(range_list)'))
         range_list=range_list[1: length(col_name_list)]
     }
-    
+
     if (length(range_list)!=length(col_name_list)) stop('Error due to length(range_list)!=length(col_name_list)')
 
     for ( dx in  1:length(range_list))
@@ -160,7 +191,7 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
          {
             if (debug==1) print("calling the function adjust_equal_ranges")
             range_list[[dx]]=adjust_equal_ranges(my_var)
-         } else if (is.character(my_var) && length(my_var) == 1 && grepl("^auto", my_var)) 
+         } else if (is.character(my_var) && length(my_var) == 1 && grepl("^auto", my_var))
          {
             if (debug==1) print("use auto conversion for auto")
             numGroup=gsub('auto', '', my_var)
@@ -177,7 +208,7 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
          {
              if (debug==1) print("calling convert2Range")
              range_list[[dx]]=convert2Range(my_var)
-         } else 
+         } else
          {
             stop(paste0("Please check range_list[[",dx,"]]"))
          }
@@ -199,7 +230,7 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
         }
     }
 
-    
+
     #if (!grepl("conditional_probability\\$", cond_evaluation))
     #{
     #  cond_evaluation_column <- sub("^(.*?)\\s.*", "\\1", cond_evaluation)
@@ -213,16 +244,16 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
     #    cond_evaluation <- paste0("conditional_probability$", cond_evaluation)
     #}
     if (debug==1) print (cond_evaluation)
-    
+
     alst <- toCountListElement(range_list)
     com.df <- gen_combination(alst)
-    if (is.vector(com.df)) 
+    if (is.vector(com.df))
     {
         com.df=data.frame(com.df)
     }
-    results = NULL 
+    results = NULL
     resultsIndex = NULL
-    
+
     cond_list=list()
     for (icol in 1:length(col_name_list))
     {
@@ -232,11 +263,11 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
     #print(paste0('nrow(clean_data):',nrow(clean_data)))
     # Iterate over combinations
     for (idx in 1:nrow(com.df)) {
-    
+
         conditional_probability = clean_data
-        
+
         for (k in seq_along(cond_list)) {
-  
+
             if (idx == 1 && debug==1) {
                 print(cond_list[[k]])
                 print(paste0(range_list[[k]][[com.df[idx, k]]][1],':',range_list[[k]][[com.df[idx, k]]][2]))
@@ -248,12 +279,12 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
             if (debug==1) print(paste0('nrow(conditional_probability):',nrow(conditional_probability)))
         }
         #print(conditional_probability)
-    
+
         # Calculate hits and odds
-        hit = sum(eval(parse(text = cond_evaluation)))      
+        hit = sum(eval(parse(text = cond_evaluation)))
         total = nrow(conditional_probability)
         odd = ifelse(total != 0, round(hit / total, 2), 0)
-    
+
         # Format the condition strings
         temp_df <- data.frame(dummy = 'dummy', stringsAsFactors = FALSE)
         for  (kk in seq_along(cond_list))
@@ -268,7 +299,7 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
         temp_df$dummy=NULL
         temp_df
         if (total != 0) {
-           
+
             result_temp_df_single=cbind(temp_df, data.frame(hit = hit, total = total, odd = odd))
             #result_index_temp_df_single=cbind(temp_df, data.frame(hit = hit, total = total, odd = odd))
             results <- rbind(results,result_temp_df_single)
@@ -278,6 +309,6 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
     }
     res=results
     if ('Weekday' %in% names(results))  res =fixColonFormat(results, 'Weekday')
-    goodchanceRes=goodchance(res)    
+    goodchanceRes=goodchance(res)
     return(list( results=res,  goodchance=goodchanceRes, range_list=range_list))
-}         
+}
