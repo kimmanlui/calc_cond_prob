@@ -16,20 +16,24 @@ df <- data.frame(<br>
 
 ## Find P(exam_lang_score ≥ 80 | age)
 We find P(exam_lang_score ≥ 80 | age) in which age is split into three groups. Note that the return is a list<br>
+
 calc_cond_prob(df, formula_string="exam_lang_score >= 80  ~ age ",  range_list=list(3))<br>
 or <br>
 calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 
 ## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
 We find P(exam_lang_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively.<br>
+
 res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))
 
-## Conduct a further analysis of the probabilities across all combinations of age and height. 
-Below is for P(exam_lang_score ≥ 80 | age) , P(exam_lang_score ≥ 80 | height) and P(exam_lang_score ≥ 80 | age and height)
+## Conduct a further analysis
+Conduct a further analysis of the probabilities across all combinations of age and height.<br>
+Below is for P(exam_lang_score ≥ 80 | age) , P(exam_lang_score ≥ 80 | height) and P(exam_lang_score ≥ 80 | age and height)<br>
 
 shortSummary(res[[1]], "age + height ", combination=1)
 
-## Utilize the goodchance function to filter for values that fall within the specified range
+## Filter out the result
+Utilize the goodchance function to filter for values that fall within the specified range<br>
 
 lapply(res_list, goodchance, upper=0.7, lower=0.25)
 
