@@ -22,11 +22,10 @@ or <br>
 calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 
 Sample Result<br>
-|===
-|Column 1 |Column 2 |Column 3
-|Cell 1, row 2 |Cell 2, row 2 |Cell 3, row 2
-|Cell 1, row 3 |Cell 2, row 3 |Cell 3, row 3
-|===
+Column One       Column Two       Column Three
+Data A           Data B           Data C
+Data D           Data E           Data F
+
 
 ## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
 We find P(exam_lang_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively.<br>
