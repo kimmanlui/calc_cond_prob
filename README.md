@@ -24,7 +24,7 @@ res=calc_cond_prob(df, "exam_score >= 80 ~ age + height + weight + income", rang
 
 shortSummary(res[[1]], "age + height ", combination=1)
 
-## Use goodchance function to extract only those with the intereted range
+## Utilize the goodchance function to filter for values that fall within the specified range
 
 lapply(res_list, goodchance, upper=0.7, lower=0.25)
 
