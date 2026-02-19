@@ -30,7 +30,16 @@ Sample Result<br>
 
 ## Find P(exam_lang_score ≥ 80 | age) (SPECIFIC) 
 We find P(exam_lang_score ≥ 80 | age) in which each age group is defined. Note that the return is a list. <br>
+
 calc_cond_prob(df, "exam_lang_score >= 80 ~ age ", range_list=list(c(16,16.5,17.5,18.5,19.5)))
+
+Sample Result<br>
+| age | hit | total | odd
+| -------- | -------- |-------- | -------- |
+| 16:16.5   | 1   | 2 | 0.5 |
+| 16.5:17.5 | 1   | 2 | 0.5 |
+| 17.5:18.5  | 1   | 2 | 0.5 |
+| 18.5:19.5  | 1   | 1 | 1 |
 
 ## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
 We find P(exam_lang_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively.<br>
