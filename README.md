@@ -57,7 +57,7 @@ calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", ran
 Conduct a further analysis of the probabilities across all combinations of age and height.<br>
 Below is for P(exam_lang_score ≥ 80 | age) , P(exam_lang_score ≥ 80 | height) and P(exam_lang_score ≥ 80 | age and height)<br>
 
-res[[1]]calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))<br>
+res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))<br>
 shortSummary(res[[1]], "age + height ", combination=1)
 
 ## Filter out the result
