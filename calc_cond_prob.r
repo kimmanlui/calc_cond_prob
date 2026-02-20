@@ -79,13 +79,20 @@ fixColonFormat=function(df, col_name='Weekday')
     return(df)
 }
 
-#' Filter those useful records
+#' Filter Data Based on Odds
 #'
-#' @param df A dataframe.
-#' @param col_name A colume name string.
-#' @param upper A number.
-#' @param lower A number.
-#' @return A list.
+#' @param df A data.frame containing the data to be evaluated. 
+#'            The DataFrame must include the column specified by `col_name` containing odds values.
+#' @param col_name A string representing the name of the column in the DataFrame that contains the odds values.
+#'                 The default is 'odd', which means the function will look for an 'odd' column in the DataFrame.
+#' @param upper A numeric threshold for the upper bound of the odds. 
+#'              Rows with an 'odd' value greater than or equal to this threshold will be included in the output.
+#'              The default value is 0.75.
+#' @param lower A numeric threshold for the lower bound of the odds. 
+#'              Rows with an 'odd' value less than or equal to this threshold and greater than 0 
+#'              will also be included in the output. The default value is 0.25.
+#' @return A filtered data.frame containing only the rows where the odds meet the specified conditions 
+#'         (either above the upper threshold or below the lower threshold and greater than 0).
 #' @export
 #' @examples
 #' df<-data.frame(exam_lang_score=c(80,88,85,82,34,34),age=c(6,7,8,6,7,8),height =c(5,6,6,7,5,7))
