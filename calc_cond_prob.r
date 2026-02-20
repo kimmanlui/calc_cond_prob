@@ -150,15 +150,24 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
     return(res_list)
 }
 
-#' Calulate Conditional Probability with Range
+#' Calculate Conditional Probability
 #'
-#' @param clean_data A dataframe.
-#' @param formula_string A formula character
-#' @param range_list A list
-#' @param cond_evaluation A string
-#' @param col_name_list A list
-#' @param debug A integer
-#' @return A list.
+#' @param clean_data A data.frame containing input data for analysis. 
+#'                   It must include all variables referenced in `formula_string` and `col_name_list`.
+#' @param formula_string An optional formula string in the format 'y ~ x1 + x2 + ...'.
+#'                       This specifies the relationship between dependent and independent variables.
+#'                       If provided, it determines the conditional evaluation and the list of column names. 
+#' @param range_list A list of ranges or boundaries corresponding to each column in `col_name_list`.
+#'                   This parameter is mandatory and must contain appropriate range definitions.
+#' @param cond_evaluation An optional string for the conditional evaluation expression.
+#'                        If not provided, it defaults to the left-hand side of `formula_string`.
+#' @param col_name_list An optional list of column names for the analysis.
+#'                      If not specified, it is derived from `formula_string`.
+#' @param debug An integer indicating the debugging mode (0 = off, 1 = on). 
+#'              When set to 1, additional output will be printed to help trace the computation steps.
+#'
+#' @return A list containing the results of the conditional probability calculation, 
+#'         the good chance evaluation, and the adjusted range list.                                    
 #' @export
 #' @examples
 #' df<-data.frame(exam_lang_score=c(80,88,85,82,34,34),age=c(6,7,8,6,7,8),height =c(5,6,6,7,5,7))
