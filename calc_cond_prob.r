@@ -97,11 +97,21 @@ goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
     return(df[ df$odd>=upper | (df$odd<=lower & df$odd>0), ])
 }
 
-#' Provide a summary for the dataframe result done by calc_cond_prob
+
+#' Generate Short Summary of Grouped Data after the Output by calc_cond_prob
 #'
-#' @param df A dataframe.
-#' @param coln A colume names string.
-#' @param combination A number.
+#' @param df A data.frame containing the raw data to be summarized. 
+#'            The DataFrame must include the columns specified in the `coln` parameter for grouping.
+#' @param coln A comma-separated string of column names to be used for grouping in the summary. 
+#'             Whitespace will be trimmed from the specified column names.
+#'             For example: "Weekday, wkhwk.c.bp".
+#' @param combination An integer indicating how to handle column combinations for the summary.
+#'                    When set to 1, the function generates all possible combinations of the columns 
+#'                    specified in `coln`. For any other value, only the specified columns will be used.
+#' @return A list of data.frames containing the summarized results for each group based on the specified columns.
+#'         Each data.frame will include the specified grouping columns, 
+#'         the sum of hits (`hit_sum`), the sum of totals (`total_sum`), 
+#'         and the calculated odds (`odd`).         
 #' @return A list.
 #' @export
 #' @import dplyr
