@@ -30,7 +30,7 @@ Sample Result<br>
 | 17:18  | 1   | 2 | 0.5 |
 | 18:19  | 1   | 2 | 0.5 |
 
-## Find P(exam_lang_score ≥ 80 | age) (SPECIFIC) 
+## Find P(exam_lang_score ≥ 80 | age) (SPECIFIC RANGE) 
 We find P(exam_lang_score ≥ 80 | age) in which each age group is defined. Note that the return is a list. <br>
 
 `calc_cond_prob(df, "exam_lang_score >= 80 ~ age ", range_list=list(c(16,16.5,17.5,18.5,19.5)))`
@@ -90,7 +90,7 @@ RESULT 3<br>
 Utilize the goodchance function to filter for values that fall within the specified range<br>
 
 `res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))`<br>
-`summary_result_list=shortSummary(res[[1]], "age + height ", combination=1)`<br>
+`summary_result_list=shortSummary(res, "age + height ", combination=1)`<br>
 `lapply(summary_result_list, goodchance, upper=0.7, lower=0.25)`<br>
 
 RESULT 1<br>
