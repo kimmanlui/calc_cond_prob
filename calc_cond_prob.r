@@ -204,7 +204,9 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
 #'         the good chance evaluation, and the adjusted range list.                                    
 #' @export
 #' @examples
+#' ## Prepare some sample data       
 #' df<-data.frame(exam_lang_score=c(80,88,85,82,34,34),age=c(6,7,8,6,7,8),height =c(5,6,6,7,5,7))
+#' ## Find P(exam_lang_score >= 80 ~ age ) where age is divided into 3 groups.                                     
 #' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evaluation=NULL,  col_name_list=NULL,  debug=0)
 {
