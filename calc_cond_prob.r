@@ -213,7 +213,9 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
 #' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 #'
 #' ##  Find P(exam_lang_score >= 80 ~ age  ) where age is divided into two groups as (5, 6.5) and (6.5 , 10) 
-#' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list( list(c(5,6.5), c(6.5,10) ))) 
+#' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list( list(c(5,6.5), c(6.5,10) )))
+#' ## or executing below
+#' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list( c(5,6.5,10) )) 
 calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evaluation=NULL,  col_name_list=NULL,  debug=0)
 {
     if (is.list(range_list)==FALSE) stop("range_list is mandatory. It must be a list type")
