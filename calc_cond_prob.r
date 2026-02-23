@@ -141,8 +141,11 @@ goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
 #' @import dplyr
 #' @importFrom utils combn
 #' @examples
+#' ## Prepare some sample data          
 #' df<-data.frame(exam_lang_score=c(80,88,85,82,34,34),age=c(6,7,8,6,7,8),height =c(5,6,6,7,5,7))
+#' ## Find P(exam_lang_score >= 80 ~ age + height) where age is divided into 3 groups and height into 4 groups.   
 #' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height", range_list=list( 3,4))
+#' ## Use the results to calculate the conditional probability for the power set of 'age' and 'height'.             
 #' shortSummary(res[[1]], "age + height ", combination=1)
 shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
   hit <- NULL
