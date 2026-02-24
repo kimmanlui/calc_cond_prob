@@ -90,7 +90,7 @@ RESULT 3<br>
 Utilize the goodchance function to filter for values that fall within the specified range<br>
 
 `res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height + weight + income", range_list=list( 3,4,4,4))`<br>
-`summary_result_list=shortSummary(res, "age + height ", combination=1)`<br>
+`summary_result_list=shortSummary(res[[1]], "age + height ", combination=1)`<br>
 `lapply(summary_result_list, goodchance, upper=0.7, lower=0.25)`<br>
 
 RESULT 1<br>
@@ -114,4 +114,4 @@ RESULT 3<br>
 
 `calc_cond_prob(df, formula_string="exam_lang_score >= 80 | exam_math_score >= 80 ~ age + income",  range_list=list(3,4))`
 
-`calc_cond_prob(df, formula_string="conditional_probability$exam_lang_score >= 80 | conditional_probability$exam_math_score >= 80 ~ age",  range_list=list(3))`
+
