@@ -6,10 +6,10 @@ Allow users to calculate conditional probabilities across defined ranges in any 
 
 ## Installation
 
-You can install `bcmaps` from CRAN:
+You can install `rangecondprob` from CRAN:
 
 ``` r
-install.packages("bcmaps")
+install.packages("rangecondprob")
 ```
 
 # Example
