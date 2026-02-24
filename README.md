@@ -53,7 +53,11 @@ Sample Result<br>
 ## Find P(exam_lang_score ≥ 80 | age) (SPECIFIC RANGE 2) 
 We find P(exam_lang_score ≥ 80 | age) focusing on two specific age groups: 16<=age<16.5 and 18.5<=age<19.5  <br>
 
-`calc_cond_prob(df, "exam_lang_score >= 80 ~ age ", range_list=list(c(16,16.5), c(18.5,19.5)))`
+`calc_cond_prob(df, "exam_lang_score >= 80 ~ age" , range_list=list( list(c(16,16.5), c(18,19.5))) ) `
+| age | hit | total | odd
+| -------- | -------- |-------- | -------- |
+| 16:16.5   | 1   | 2 | 0.5 |
+| 18.5:19.5  | 1   | 1 | 1.0 |
 
 ## Find P(exam_lang_score ≥ 80 | age and height and weight and income)
 We find P(exam_lang_score ≥ 80 | age and height and weight and income), where their groups are split into 3,4,4,4 groups, respectively.<br>
