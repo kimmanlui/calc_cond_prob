@@ -1,5 +1,5 @@
 Package: rangecondprob
-Title: Range Conditional Probability
+Title: Tools for Conditional Probability
 Version: 0.4.1
 Authors@R: person("Kim Man", "Lui", email = "cskmlui@gmail.com",
     role = c("aut", "cre"))
