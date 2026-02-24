@@ -4,6 +4,13 @@ Range Conditional Probability
 # Description 
 Allow users to calculate conditional probabilities across defined ranges in any numeric data frame. Unlike general conditional probability packages that require numerical data to be converted into categorical data, this toolkit directly handles numerical data in various ranges, enabling the calculation of conditional probabilities without conversion. For example, I have a dataset named `df` that includes two numerical columns: `sleep_hour` and `age`. To find P( sleep_hour >= 8.5 l age), we typically need to categorize age into groups, such as "old," "middle-aged," and "young," in order to utilize the built-in functions in R. This package simplifies our task by handling this categorization internally. We can use the function `calc_cond_prob(df, "sleep_hour >= 8.5 ~ age", range_list=list(3))` to obtain the result.
 
+## Installation
+
+You can install `bcmaps` from CRAN:
+
+``` r
+install.packages("bcmaps")
+```
 
 # Example
 ## Sample Data
@@ -114,4 +121,17 @@ RESULT 3<br>
 
 `calc_cond_prob(df, formula_string="exam_lang_score >= 80 | exam_math_score >= 80 ~ age + income",  range_list=list(3,4))`
 
+
+## Licence
+
+    # 
+    # Licensed under the Apache License, Version 2.0 (the "License");
+    # you may not use this file except in compliance with the License.
+    # You may obtain a copy of the License at
+    # 
+    # http://www.apache.org/licenses/LICENSE-2.0
+    # 
+    # Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and limitations under the License.
 
