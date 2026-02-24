@@ -4,7 +4,7 @@ Version: 0.4.1
 Authors@R: person("Kim Man", "Lui", email = "cskmlui@gmail.com",
     role = c("aut", "cre"))
 Description: Streamline the calculation of conditional probabilities for various numeric ranges in an R DataFrame. It automates the need to convert numerical data into categorical data for conditional probability calculation, making it ideal for quick and preliminary data analysis. 
-License: GPL (>= 3)
+License: GPL-3
 Depends: R (>= 3.0.0), dplyr
 Encoding: UTF-8
 LazyData: true
