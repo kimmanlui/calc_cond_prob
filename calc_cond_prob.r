@@ -114,11 +114,14 @@ fixColonFormat=function(df, col_name='Weekday')
 #' @examples
 #' ## Prepare some sample data       
 #' df<-data.frame(exam_lang_score=c(80,88,85,82,34,34),age=c(6,7,8,6,7,8),height =c(5,6,6,7,5,7))
-#' ## Find P(exam_lang_score >= 80 ~ age + height) where age is divided into 3 groups and height into 4 groups.   
+#' ## Find P(exam_lang_score >= 80 ~ age + height) 
+#' ## where age is divided into 3 groups and height into 4 groups.   
 #' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height", range_list=list( 3,4))
-#' ## Use the results to calculate the conditional probability for the power set of 'age' and 'height'.         
+#' ## Use the results to calculate the conditional probability for 
+#' ## the power set of 'age' and 'height'.         
 #' summary_result_list=shortSummary(res[[1]], "age + height ", combination=1)
-#' ## Extract the results of the high and low odds obtained from executing the cal_cond_prob() function. 
+#' ## Extract the results of the high and low odds obtained from 
+#' ## executing the cal_cond_prob() function. 
 #' lapply(summary_result_list, goodchance, upper=0.7, lower=0.25)
 goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
 {
@@ -147,9 +150,11 @@ goodchance=function(df, col_name='odd', upper=0.75, lower=0.25)
 #' @examples
 #' ## Prepare some sample data          
 #' df<-data.frame(exam_lang_score=c(80,88,85,82,34,34),age=c(6,7,8,6,7,8),height =c(5,6,6,7,5,7))
-#' ## Find P(exam_lang_score >= 80 ~ age + height) where age is divided into 3 groups and height into 4 groups.   
+#' ## Find P(exam_lang_score >= 80 ~ age + height) 
+#' ## where age is divided into 3 groups and height into 4 groups.   
 #' res=calc_cond_prob(df, "exam_lang_score >= 80 ~ age + height", range_list=list( 3,4))
-#' ## Use the results to calculate the conditional probability for the power set of 'age' and 'height'.             
+#' ## Use the results to calculate the conditional probability for 
+#' ## the power set of 'age' and 'height'.             
 #' shortSummary(res[[1]], "age + height ", combination=1)
 shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
   hit <- NULL
@@ -216,7 +221,8 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
 #' ## Find P(exam_lang_score >= 80 ~ age ) where age is divided into 3 groups.                                     
 #' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))
 #'
-#' ##  Find P(exam_lang_score >= 80 ~ age  ) where age is divided into two groups as (5, 6.5) and (6.5 , 10) 
+#' ## Find P(exam_lang_score >= 80 ~ age  ) 
+#' ## where age is divided into two groups as (5, 6.5) and (6.5 , 10) 
 #' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list( list(c(5,6.5), c(6.5,10) )))
 #' ## the above is the same as below
 #' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list( c(5,6.5,10) )) 
@@ -371,4 +377,5 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
     goodchanceRes=goodchance(res)
     return(list( results=res,  goodchance=goodchanceRes, range_list=range_list))
 }
+
 
