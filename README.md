@@ -25,7 +25,7 @@ df <- data.frame(<br>
 &nbsp;&nbsp;income = c(3000, 3200, 3500, 4000, 2600, 3100, 3900)<br>
 )
 
-## Find P(exam_lang_score ≥ 80 | age) (EASY)
+## Find P(exam_lang_score ≥ 80 | age) (QUICK)
 We find P(exam_lang_score ≥ 80 | age) in which age is split into three groups. Note that the return is a list which includes the output consists of a list containing [1] the results of the calculations, [2] a dataFrame of high and low odds extracted from the results, and [3] a range list used for the calculation. Note that outliners are removed.<br>
 
 `calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list(3))`
