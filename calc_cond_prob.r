@@ -200,8 +200,8 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
 #'                        If not provided, it defaults to the left-hand side of `formula_string`.
 #' @param col_name_list An optional list of column names for the analysis.
 #'                      If not specified, it is derived from `formula_string`.
-#' @param debug An integer indicating the debugging mode (0 = off, 1 = on). 
-#'              When set to 1, additional output will be printed to help trace the computation steps.
+#' @param verbose A boolean indicating more message. 
+#'              When set to TRUE, additional output will be printed to help trace the computation steps.
 #'
 #' @return A list containing the results of the conditional probability calculation, 
 #'         the good chance evaluation, and the adjusted range list.                                    
@@ -214,9 +214,9 @@ shortSummary <- function(df, coln = "Weekday , wkhwk.c.bp", combination=1) {
 #'
 #' ##  Find P(exam_lang_score >= 80 ~ age  ) where age is divided into two groups as (5, 6.5) and (6.5 , 10) 
 #' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list( list(c(5,6.5), c(6.5,10) )))
-#' ## or executing below
+#' ## the above is the same as below
 #' calc_cond_prob(df, "exam_lang_score >= 80  ~ age ",  range_list=list( c(5,6.5,10) )) 
-calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evaluation=NULL,  col_name_list=NULL,  debug=0)
+calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evaluation=NULL,  col_name_list=NULL,  verbose=FALSE)
 {
     if (is.list(range_list)==FALSE) stop("range_list is mandatory. It must be a list type")
 
@@ -230,14 +230,14 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
         if (is.null(cond_evaluation))
         {
             cond_evaluation=lhs
-            if (debug==1) print(paste0("Use formula_string for cond_evaluation:", cond_evaluation))
+            if (verbose) print(paste0("Use formula_string for cond_evaluation:", cond_evaluation))
         }
         if (is.null(col_name_list))
         {
             rhs_list <- strsplit(rhs, " *\\+ *")[[1]]
             col_name_list <-  trimws(rhs_list)
             col_name_list = as.list(col_name_list)
-            if (debug==1) print(paste0("Use formula_string for col_name_list:", col_name_list))
+            if (verbose) print(paste0("Use formula_string for col_name_list:", col_name_list))
         }
     }
 
@@ -255,25 +255,25 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
          my_var=range_list[[dx]]
          if (is.list(my_var)==TRUE)
          {
-            if (debug==1) print("calling the function adjust_equal_ranges")
+            if (verbose) print("calling the function adjust_equal_ranges")
             range_list[[dx]]=adjust_equal_ranges(my_var)
          } else if (is.character(my_var) && length(my_var) == 1 && grepl("^auto", my_var))
          {
-            if (debug==1) print("use auto conversion for auto")
+            if (verbose) print("use auto conversion for auto")
             numGroup=gsub('auto', '', my_var)
             numGroup=as.numeric(numGroup)
             tempName=col_name_list[[dx]]
             range_list[[dx]]=findBoundary(clean_data[ , tempName], numGroup)
          } else if (is.numeric(my_var) && length(my_var) == 1)
          {
-             if (debug==1) print("use auto conversion for single numeric")
+             if (verbose) print("use auto conversion for single numeric")
              numGroup=my_var
              tempName=col_name_list[[dx]]
              tempdf=clean_data[ , tempName]
              range_list[[dx]]=findBoundary(tempdf , numGroup)
          } else if (is.numeric(my_var) && length(my_var) > 1)
          {
-             if (debug==1) print("calling convert2Range")
+             if (verbose) print("calling convert2Range")
              range_list[[dx]]=convert2Range(my_var)
          } else
          {
@@ -298,7 +298,7 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
     }
 
 
-    if (debug==1) print (cond_evaluation)
+    if (verbose) print (cond_evaluation)
 
     alst <- toCountListElement(range_list)
     com.df <- gen_combination(alst)
@@ -323,7 +323,7 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
 
         for (k in seq_along(cond_list)) {
 
-            if (idx == 1 && debug==1) {
+            if (idx == 1 && verbose) {
                 print(cond_list[[k]])
                 print(paste0(range_list[[k]][[com.df[idx, k]]][1],':',range_list[[k]][[com.df[idx, k]]][2]))
                 print(parse(text = cond_list[[k]]))
@@ -331,7 +331,7 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
             # Safely evaluate the condition
             conditional_probability <- conditional_probability %>%
                 filter(eval(parse(text = cond_list[[k]])))
-            if (debug==1) print(paste0('nrow(conditional_probability):',nrow(conditional_probability)))
+            if (verbose) print(paste0('nrow(conditional_probability):',nrow(conditional_probability)))
         }
         #print(conditional_probability)
 
@@ -359,7 +359,7 @@ calc_cond_prob=function(clean_data, formula_string=NULL, range_list, cond_evalua
             #result_index_temp_df_single=cbind(temp_df, data.frame(hit = hit, total = total, odd = odd))
             results <- rbind(results,result_temp_df_single)
             resultsIndex = rbind(results,result_temp_df_single)
-            if (debug==1) print(result_temp_df_single)
+            if (verbose) print(result_temp_df_single)
         }
     }
     res=results
